@@ -4,17 +4,28 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "nodemon --watch src --ext ts,json --exec \"npx ts-node src/server.ts\"",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/node": "^25.3.3",
+    "eslint": "^10.0.2",
+    "globals": "^17.4.0",
+    "jiti": "^2.6.1",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1",
-    "nodemon": "^3.1.14"
+    "fs": "^0.0.1-security",
+    "tsx": "^4.21.0"
   }
 }
