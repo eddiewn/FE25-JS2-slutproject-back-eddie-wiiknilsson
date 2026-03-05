@@ -75,8 +75,8 @@ app.delete("/deleteAssignment", async (req, res) => {
     );
     console.log(assignmentsIndex);
 
-    if (assignmentsIndex) {
-        assignments?.splice(assignmentsIndex, 1);
+    if (assignments && assignmentsIndex !== -1) {
+        assignments?.splice(assignmentsIndex!, 1);
     }
 
     if (assignments) {
