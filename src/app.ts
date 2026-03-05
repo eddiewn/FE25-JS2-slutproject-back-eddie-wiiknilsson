@@ -65,3 +65,9 @@ app.post("/addMember", async(req, res) => {
     AddMember(members)
     res.json("Successfully added member")
 })
+
+app.delete("/deleteAssignment", async(req, res) => {
+    const id = req.body.id
+
+    res.json(`Will attempt to remove with ID: ${id}`)
+})

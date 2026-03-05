@@ -8,8 +8,7 @@ export const GetAssignments = async () => {
 
         return data;
     }
-    catch{
-        const error = "Error receiving assignments"
-        return error;
+    catch(error){
+        console.log(error);
     }
 }
