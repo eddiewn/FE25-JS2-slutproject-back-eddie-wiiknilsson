@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors"
 import { GetAssignments } from "./AssignmentController/GetAssignments.ts";
 import { AddAssignments } from "./AssignmentController/AddAssignments.ts";
+import { GetMembers } from "./MemberController/GetMembers.ts";
+import { AddMember } from "./MemberController/AddMember.ts"
+// import AddMember
 // import { Assignments } from "./Types.ts";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -34,5 +37,26 @@ app.post("/addAssignment", async(req, res) => {
         AddAssignments(assignments)
     }
 
-    res.json("yup i got it")
+    res.json("Successfully added assignment")
+})
+
+app.post("/addMember", async(req, res) => {
+    const { name, category } = await req.body;
+    const members = await GetMembers();
+
+    console.log("I am here")
+
+    if(Array.isArray(members)){
+        members.push({
+            id: uuidv4(),
+            name: name,
+            category: category,
+        })
+    }else{
+        res.json("Wrong adding member :(")
+        return;
+    }
+
+    AddMember(members)
+    res.json("Successfully added member")
 })
