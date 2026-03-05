@@ -85,3 +85,21 @@ app.delete("/deleteAssignment", async (req, res) => {
 
     res.json(`Will attempt to remove with ID: ${id}`);
 });
+
+app.patch("/patchAssignment", async(req, res) => {
+    const patchAssignment = req.body;
+    const assignments = await GetAssignments();
+
+    console.log(patchAssignment)
+
+    const assignmentsIndex = assignments?.findIndex(
+        (assignment) => assignment.id === patchAssignment.id,
+    );
+
+    if(assignments && assignmentsIndex !== undefined && assignmentsIndex !== -1){
+        assignments[assignmentsIndex] = patchAssignment;
+        AddAssignments(assignments);
+    }
+
+    res.json(`Attempting to patch ${patchAssignment.id}`)
+})
