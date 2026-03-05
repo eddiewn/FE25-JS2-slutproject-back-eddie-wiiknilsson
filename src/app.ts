@@ -12,9 +12,14 @@ export const app = express();
 app.use(cors())
 app.use(express.json())
 
-app.get("/", async(req, res) => {
+app.get("/getAssignments", async(req, res) => {
     const assignments = await GetAssignments();
     res.json(assignments);
+})
+
+app.get("/getMembers", async (req, res) => {
+    const members = await GetMembers();
+    res.json(members);
 })
 
 app.post("/addAssignment", async(req, res) => {
