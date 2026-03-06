@@ -5,7 +5,7 @@ import {AddAssignments} from "./AssignmentController/AddAssignments";
 import {GetMembers} from "./MemberController/GetMembers";
 import {AddMember} from "./MemberController/AddMember";
 // import AddMember
-// import { Assignments } from "./Types";
+// import { Assignments } from "./Types.ts";
 import {v4 as uuidv4} from "uuid";
 import {DeleteAssignments} from "./AssignmentController/DeleteAssignments";
 
@@ -24,7 +24,12 @@ app.get("/getMembers", async (_, res) => {
 });
 
 app.post("/addAssignment", async (req, res) => {
-    const {title, description, category} = await req.body;
+    const {title, description, category} = req.body;
+
+    if (!title || !description || !category) {
+        res.json("No fully asignemnt done");
+        return;
+    }
 
     const assignments = await GetAssignments();
 
@@ -46,7 +51,13 @@ app.post("/addAssignment", async (req, res) => {
 });
 
 app.post("/addMember", async (req, res) => {
-    const {name, category} = await req.body;
+    const {name, category} = req.body;
+
+    if (!name  || !category) {
+        res.json("No name or category entetred entered");
+        return;
+    }
+
     const members = await GetMembers();
 
     console.log("I am here");
@@ -75,8 +86,8 @@ app.delete("/deleteAssignment", async (req, res) => {
     );
     console.log(assignmentsIndex);
 
-    if (assignments && assignmentsIndex && assignmentsIndex !== -1) {
-        assignments.splice(assignmentsIndex, 1);
+    if (assignments && assignmentsIndex !== -1) {
+        assignments?.splice(assignmentsIndex!, 1);
     }
 
     if (assignments) {
@@ -86,20 +97,24 @@ app.delete("/deleteAssignment", async (req, res) => {
     res.json(`Will attempt to remove with ID: ${id}`);
 });
 
-app.patch("/patchAssignment", async(req, res) => {
+app.patch("/patchAssignment", async (req, res) => {
     const patchAssignment = req.body;
     const assignments = await GetAssignments();
 
-    console.log(patchAssignment)
+    console.log(patchAssignment);
 
     const assignmentsIndex = assignments?.findIndex(
         (assignment) => assignment.id === patchAssignment.id,
     );
 
-    if(assignments && assignmentsIndex !== undefined && assignmentsIndex !== -1){
+    if (
+        assignments &&
+        assignmentsIndex !== undefined &&
+        assignmentsIndex !== -1
+    ) {
         assignments[assignmentsIndex] = patchAssignment;
         AddAssignments(assignments);
     }
 
-    res.json(`Attempting to patch ${patchAssignment.id}`)
-})
+    res.json(`Attempting to patch ${patchAssignment.id}`);
+});
