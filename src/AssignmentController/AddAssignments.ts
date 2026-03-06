@@ -4,8 +4,6 @@ import type {Assignments} from "../Types";
 
 export const AddAssignments = async (newAssignments: Assignments[]) => {
     try {
-        // const assignments = await readFile("./src/database/assignments.json", 'utf-8')
-        // const data: Assignments[] = JSON.parse(assignments);
 
         fs.writeFile(
             "./src/database/assignments.json",

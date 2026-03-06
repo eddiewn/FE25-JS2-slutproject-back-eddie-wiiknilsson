@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
-import {GetAssignments} from "./AssignmentController/GetAssignments.ts";
-import {AddAssignments} from "./AssignmentController/AddAssignments.ts";
-import {GetMembers} from "./MemberController/GetMembers.ts";
-import {AddMember} from "./MemberController/AddMember.ts";
+import {GetAssignments} from "./AssignmentController/GetAssignments";
+import {AddAssignments} from "./AssignmentController/AddAssignments";
+import {GetMembers} from "./MemberController/GetMembers";
+import {AddMember} from "./MemberController/AddMember";
 // import AddMember
-// import { Assignments } from "./Types.ts";
+// import { Assignments } from "./Types";
 import {v4 as uuidv4} from "uuid";
-import {DeleteAssignments} from "./AssignmentController/DeleteAssignments.ts";
+import {DeleteAssignments} from "./AssignmentController/DeleteAssignments";
 
 export const app = express();
 app.use(cors());
@@ -75,8 +75,8 @@ app.delete("/deleteAssignment", async (req, res) => {
     );
     console.log(assignmentsIndex);
 
-    if (assignments && assignmentsIndex !== -1) {
-        assignments?.splice(assignmentsIndex!, 1);
+    if (assignments && assignmentsIndex && assignmentsIndex !== -1) {
+        assignments.splice(assignmentsIndex, 1);
     }
 
     if (assignments) {
